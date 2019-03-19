@@ -20,7 +20,7 @@ var linkList = [
         author: "aurora.nicole"
     }
 ];
-
+    //-----ELEMENT CREATOR-----//
 function createLinkElement(link) {
     var linktitle = document.createElement("a");
     linktitle.href = link.url;
@@ -47,17 +47,27 @@ function createLinkElement(link) {
 
     return linkDiv;
 }
+    //-----FEED ARRAY INTO FUNCTION-----//
+var content = document.getElementById("content");
+var newLinkButton = document.getElementById("newLinkButton");
 
-/*var content = document.getElementById("content");
-linkList.forEach(function (link) {
-    var linkElement = createLinkElement(link);
+linkList.forEach(function (linkListItem) {
+    var linkElement = createLinkElement(linkListItem);
     content.appendChild(linkElement);
-});*/
+});
 
+    //-----NEW LINK FUNCTIONALITY-----//
 var addedBy = document.getElementById('addedBy');
 var linkTitle = document.getElementById('linkTitle');
 var linkURL = document.getElementById('linkURL');
 var formGo = document.getElementById('formGo');
+var newLinkForm = document.getElementById('newLinkForm');
+
+//creat new Link 
+newLinkButton.addEventListener('click', function(){
+    newLinkButton.classList.add('hidden');
+    newLinkForm.classList.remove('hidden');
+});
 
 function newFromInput(){
     var newLink = new Object();
@@ -70,4 +80,21 @@ function newFromInput(){
         var link =  createLinkElement(newLink);
         content.insertAdjacentElement('afterBegin',link);
 }
-formGo.addEventListener('click',newFromInput);
+
+//add link to list
+formGo.addEventListener('click', function(){
+    if (linkTitle.value===''||linkURL.value===''||addedBy===''){
+        document.getElementById('formHelpSpan').innerHTML='<span style="color:red;font-size:12px;">complete all fields</span>';
+    } else {
+    newLinkButton.classList.remove('hidden');
+    newLinkForm.classList.add('hidden');
+    newFromInput();
+    document.getElementById("newLinkForm").reset();
+
+}
+});
+
+//check input
+addedBy.addEventListener('focus',function(){
+    document.getElementById('formHelpSpan').innerHTML='';
+});

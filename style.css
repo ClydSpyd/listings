@@ -12,6 +12,9 @@ span {
     font-weight: normal;
     font-size: 80%;
 }
+.hidden{
+    display:none;
+}
 
 .link {
     background: white;
@@ -24,9 +27,14 @@ form{
     margin: 10px 0 20px 0;
 }
 input{
-    margin-right:10px;
+    margin-right:5px;
     height:20px;
 }
+
+#newLinkButton{
+    margin: 10px 0 20px 0;
+}
+
 #addedBy{
     width:20%;
 }
