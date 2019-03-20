@@ -48,7 +48,7 @@ function createLinkElement(link) {
 
     return linkDiv;
 }
-    //-----FEED ARRAY INTO FUNCTION-----//
+    //-----PASS ARRAY TO FUNCTION ITEM BY ITEM-----//
 var content = document.getElementById("content");
 var newLinkButton = document.getElementById("newLinkButton");
 newLinkButton.focus();
@@ -105,10 +105,15 @@ function newFromInput(){
         
 };
 
-//add link to list
+//check input, add link to list
 formGo.addEventListener('click', function(){
     if (linkTitle.value===''||linkURL.value===''||addedBy===''){
         document.getElementById('formHelpSpan').innerHTML='<span style="color:red;font-size:12px;">complete all fields</span>';
+        
+        //clear help message
+        addedBy.addEventListener('focus',function(){
+            document.getElementById('formHelpSpan').innerHTML='';
+        });
     } else {
     newLinkButton.classList.remove('hidden');
     newLinkForm.classList.add('hidden');
@@ -116,9 +121,4 @@ formGo.addEventListener('click', function(){
     document.getElementById("newLinkForm").reset();
 
 }
-});
-
-//check input
-addedBy.addEventListener('focus',function(){
-    document.getElementById('formHelpSpan').innerHTML='';
 });
