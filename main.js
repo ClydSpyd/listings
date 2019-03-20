@@ -1,8 +1,3 @@
-// List of links to show. Each link has:
-// - a title
-// - a URL
-// - an author (the person who added it)
-
 var linkList = [
     {
         title: "Kottke",
@@ -20,6 +15,12 @@ var linkList = [
         author: "aurora.nicole"
     }
 ];
+
+//check local storage for entries
+if(localStorage.getItem('newArrayItem')!==null) {
+    var storage = JSON.parse(localStorage['newArrayItem']);
+    linkList.push(storage);}
+
     //-----ELEMENT CREATOR-----//
 function createLinkElement(link) {
     var linktitle = document.createElement("a");
@@ -50,11 +51,13 @@ function createLinkElement(link) {
     //-----FEED ARRAY INTO FUNCTION-----//
 var content = document.getElementById("content");
 var newLinkButton = document.getElementById("newLinkButton");
+newLinkButton.focus();
 
 linkList.forEach(function (linkListItem) {
     var linkElement = createLinkElement(linkListItem);
     content.appendChild(linkElement);
 });
+
 
     //-----NEW LINK FUNCTIONALITY-----//
 var addedBy = document.getElementById('addedBy');
@@ -63,23 +66,44 @@ var linkURL = document.getElementById('linkURL');
 var formGo = document.getElementById('formGo');
 var newLinkForm = document.getElementById('newLinkForm');
 
-//creat new Link 
+//show form
 newLinkButton.addEventListener('click', function(){
     newLinkButton.classList.add('hidden');
     newLinkForm.classList.remove('hidden');
+    addedBy.focus();
 });
 
+//create new Link 
 function newFromInput(){
     var newLink = new Object();
         newLink.title = linkTitle.value
         newLink.url = linkURL.value;
         newLink.author = addedBy.value;
-        //var jsonString = JSON.stringify(newLink);
-        //var jObj = JSON.parse(jsonString);
-        //linkList.push(jObj);
         var link =  createLinkElement(newLink);
         content.insertAdjacentElement('afterBegin',link);
-}
+
+        //save new entry to local storage//
+        var jsonString = JSON.stringify(newLink);
+        localStorage.setItem('newArrayItem',jsonString);
+        
+        //save multiple entries to local storage//
+        /*if(localStorage.getItem('newArrayItem')===null) {
+        var jsonString = JSON.stringify(newLink);
+        localStorage.setItem('newArrayItem',jsonString);}
+        else {
+        var existingStorage=localStorage.getItem('newArrayItem',jsonString);
+        var jsonString = JSON.stringify(newLink);
+        existingStorage+=jsonString;
+        localStorage.setItem('newArrayItem',existingStorage);
+        }*/
+
+        //add new entry to array, push array to local storage
+        /*var jObj = JSON.parse(jsonString);
+        linkList.push(jObj);
+        var JSONreadyLinks = JSON.stringify(linkList);
+        localStorage.setItem('links',JSONreadyLinks);*/
+        
+};
 
 //add link to list
 formGo.addEventListener('click', function(){
