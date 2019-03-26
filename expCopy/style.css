@@ -1,0 +1,43 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #eee;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+h1{
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+span {
+    font-weight: normal;
+    font-size: 80%;
+}
+.hidden{
+    display:none;
+}
+
+.link {
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+/*form elements*/
+form{
+    margin: 10px 0 20px 0;
+}
+input{
+    margin-right:5px;
+    height:20px;
+}
+
+#newLinkButton{
+    margin: 10px 0 20px 0;
+}
+
+#addedBy{
+    width:20%;
+}
+#linkTitle, #linkURL{
+    width:30%;
+}
