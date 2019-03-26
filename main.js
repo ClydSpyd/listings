@@ -16,10 +16,16 @@ var linkList = [
     }
 ];
 
+
 //check local storage for entries
-if(localStorage.getItem('newArrayItem')!==null) {
-    var storage = JSON.parse(localStorage['newArrayItem']);
-    linkList.push(storage);}
+//if(localStorage.getItem('newArrayItem')!==null) {
+  //  var storage = JSON.parse(localStorage['newArrayItem']);
+    //linkList.push(storage);}
+
+    if(localStorage.getItem('newArrayItem')!==null) {
+        linkList=JSON.parse(localStorage['newArrayItem']);
+    }
+    
 
     //-----ELEMENT CREATOR-----//
 function createLinkElement(link) {
@@ -82,9 +88,16 @@ function newFromInput(){
         var link =  createLinkElement(newLink);
         content.insertAdjacentElement('afterBegin',link);
 
+        //with Bakly
+
+        linkList.push(newLink);
+        localStorage.setItem('newArrayItem',JSON.stringify(linkList));
+        
+
+
         //save new entry to local storage//
-        var jsonString = JSON.stringify(newLink);
-        localStorage.setItem('newArrayItem',jsonString);
+        //var jsonString = JSON.stringify(newLink);
+        //localStorage.setItem('newArrayItem',jsonString);
         
         //save multiple entries to local storage//
         /*if(localStorage.getItem('newArrayItem')===null) {
